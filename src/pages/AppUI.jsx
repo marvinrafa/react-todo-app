@@ -28,7 +28,9 @@ function AppUI() {
         {loading && <TodoLoader></TodoLoader>}
         {error && <p style={{ textAlign: "center" }}>Ha ocurrido un error</p>}
         {!loading && !searchedTodos.length && (
-          <p style={{ textAlign: "center" }}>Crea tu primer TODO!</p>
+          <p style={{ textAlign: "center", fontSize: "20px" }}>
+            Crea tus tareas haciendo clic en +
+          </p>
         )}
         {searchedTodos.map((todo, index) => (
           <TodoItem
