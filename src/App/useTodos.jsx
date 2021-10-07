@@ -1,16 +1,15 @@
 import React from "react";
 import useLocalStorage from "./useLocalStorage";
 
-//Creando estado para compartirlo en todos los componentes de la app
-const TodoContext = React.createContext();
-
-function TodoProvider(props) {
+//Otros custom hook. No usaremos context porque la app no lo necesita
+function useTodos() {
   //Llamando custom hook
   const {
     item: todos,
     saveItem: saveTodos,
     loading,
     error,
+    synchronizeItem: synchronizeTodos,
   } = useLocalStorage("TODOS_V1", []);
 
   const [searchValue, setSearchValue] = React.useState("");
@@ -55,27 +54,21 @@ function TodoProvider(props) {
   //Hook inmediatamente despues de renderizado
   // React.useLayoutEffect
 
-  return (
-    <TodoContext.Provider
-      value={{
-        loading: loading,
-        error: error,
-        totalTodos: totalTodos,
-        completedTodos: completedTodos,
-        searchValue: searchValue,
-        setSearchValue: setSearchValue,
-        searchedTodos: searchedTodos,
-        completeATodo: completeATodo,
-        deleteATodo: deleteATodo,
-        addTodo,
-        openModal,
-        setOpenModal,
-      }}
-    >
-      {/* //Componentes que usaran el provider */}
-      {props.children}
-    </TodoContext.Provider>
-  );
+  return {
+    loading: loading,
+    error: error,
+    totalTodos: totalTodos,
+    completedTodos: completedTodos,
+    searchValue: searchValue,
+    setSearchValue: setSearchValue,
+    searchedTodos: searchedTodos,
+    completeATodo: completeATodo,
+    deleteATodo: deleteATodo,
+    addTodo,
+    openModal,
+    setOpenModal,
+    synchronizeTodos,
+  };
 }
 
-export { TodoContext, TodoProvider };
+export { useTodos };
