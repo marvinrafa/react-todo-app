@@ -49,7 +49,7 @@ function App() {
         onLoading={() => <TodoLoader />}
         onEmptyTodos={() => <EmptyTodos />}
         onEmptySearchResults={() => <EmptySearchResult searchValue={searchValue} />}
-        //Usando las render Props
+        //Usando las render Prop
         render={(todo, index) => (
           <TodoItem
             key={index}
